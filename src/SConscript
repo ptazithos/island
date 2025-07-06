@@ -6,6 +6,5 @@ program = env.Program('main', Glob('*.c'))
 env.AlwaysBuild(program)
 
 Alias('build', program)
-Alias('run', program, Action('./build/main', cmdstr=''))
 Alias('clean', None, Delete('build'))
 
