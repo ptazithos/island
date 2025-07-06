@@ -29,9 +29,31 @@ bool initialize_window(void) {
   return true;
 }
 
+void process_input(void) {
+  SDL_Event event;
+  while (SDL_PollEvent(&event)) {
+    switch (event.type) {
+    case SDL_EVENT_QUIT:
+      is_running = false;
+      break;
+    case SDL_EVENT_KEY_DOWN:
+      if (event.key.key == SDLK_ESCAPE) {
+        is_running = false;
+      }
+      break;
+    }
+  }
+}
+
 int main(void) {
   /* Create a SDL window */
   is_running = initialize_window();
+
+  while (is_running) {
+    process_input();
+
+    SDL_Delay(16);
+  }
 
   return 0;
 }
