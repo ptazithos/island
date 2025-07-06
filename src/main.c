@@ -8,21 +8,21 @@ SDL_Window *window = NULL;
 SDL_Renderer *renderer = NULL;
 
 bool initialize_window(void) {
-  if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) != 0) {
-    fprintf(stderr, "Error initializing SDL.\n");
+  if (!SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS)) {
+    fprintf(stderr, "Error initializing SDL: %s\n", SDL_GetError());
     return false;
   }
 
   window = SDL_CreateWindow("Island", 800, 600,
                             SDL_WINDOW_RESIZABLE | SDL_WINDOW_BORDERLESS);
   if (!window) {
-    fprintf(stderr, "Error creating SDL window.\n");
+    fprintf(stderr, "Error creating SDL window: %s\n", SDL_GetError());
     return false;
   }
 
   renderer = SDL_CreateRenderer(window, NULL);
   if (!renderer) {
-    fprintf(stderr, "Error creating SDL renderer.\n");
+    fprintf(stderr, "Error creating SDL renderer: %s\n", SDL_GetError());
     return false;
   }
 
