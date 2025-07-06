@@ -1,6 +1,7 @@
 from SCons.Script import Environment, Glob, Alias, Action, Delete
 
 env = Environment(CC='clang')
+env.Append(LIBS=['SDL3'])
 program = env.Program('main', Glob('*.c'))
 env.AlwaysBuild(program)
 
