@@ -1,9 +1,11 @@
-from SCons.Script import Environment
+from SCons.Script import Environment, Glob
 
 env = Environment(CC='clang')
-program = env.Program('main.c')
+program = env.Program('main', Glob('*.c'))
+env.AlwaysBuild(program)
 
 env.AddPostAction(program, 
 "@echo '-----------------';"
 "./build/main;" \
 "echo '-----------------';")
+
