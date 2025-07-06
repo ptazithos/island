@@ -1,13 +1,10 @@
-from SCons.Script import Environment, Glob, Alias, Delete
+from SCons.Script import Environment, Glob, Alias, Action, Delete
 
 env = Environment(CC='clang')
 program = env.Program('main', Glob('*.c'))
 env.AlwaysBuild(program)
-env.AddPostAction(program, 
-"@echo '-----------------';"
-"./build/main;" \
-"echo '-----------------';")
-Alias('build', program)
 
+Alias('build', program)
+Alias('run', program, Action('./build/main', cmdstr=''))
 Alias('clean', None, Delete('build'))
 
